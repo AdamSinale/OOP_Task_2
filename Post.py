@@ -6,6 +6,7 @@ class Post:
         self.type = type
         self.likes = set()
         self.comments = []
+        print(self)
 
     def like(self, user):
         if user not in self.likes:

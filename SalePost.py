@@ -3,11 +3,11 @@ from Post import Post
 
 class SalePost(Post):
     def __init__(self, user, type, product, price, location):
-        super().__init__(user, type)
         self.product = product
         self.price = price
         self.location = location
-        print(self)
+        self.available = True;
+        super().__init__(user, type)
 
     def discount(self, discount, password):
         if self.owner.password == password:
@@ -15,7 +15,8 @@ class SalePost(Post):
             print("Discount on "+self.owner.username+" product! the new price is: " + str(self.price))
 
     def sold(self, password):
-        if self.owner.password == password:
+        if self.owner.password == password and self.available:
+            self.available = False
             print(self.owner.username + "'s product is sold")
 
     def __str__(self):

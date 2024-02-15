@@ -1,4 +1,5 @@
 
+from PostFactory import PostFactory
 from ImagePost import ImagePost
 from SalePost import SalePost
 from TextPost import TextPost
@@ -19,16 +20,15 @@ class User:
     def unfollow(self, user2):
         if user2 in self.followers:
             self.followers.remove(user2)
+            print(self.username + " unfollowed " + user2.username)
 
-    def publish_post(self, type, *args):
-        if type == "Text":
-            post = TextPost(self, type, args[0])
-        elif type == "Image":
-            post = ImagePost(self, type, args[0])
-        elif type == "Sale":
-            post = SalePost(self, type, *args)
-        else:
-            raise ValueError("Invalid post type")
-
+    def publish_post(self, type, content, price=None, location=None):
+        post = PostFactory.createPost(self, type, content, price, location)
         self.posts.append(post)
         return post
+
+    def print_notifications(self):
+        print(self.username + "'s notifications:")
+
+    def __str__(self):
+        return "User name: " + self.username + ", Number of posts: " + str(len(self.posts)) + ", Number of followers: " + str(len(self.followers))
