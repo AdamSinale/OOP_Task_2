@@ -6,7 +6,7 @@ class SalePost(Post):
         self.product = product
         self.price = price
         self.location = location
-        self.available = True;
+        self.available = True
         super().__init__(user, type)
 
     def discount(self, discount, password):

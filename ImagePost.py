@@ -1,4 +1,5 @@
-
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 from Post import Post
 
 class ImagePost(Post):
@@ -7,7 +8,10 @@ class ImagePost(Post):
         super().__init__(user, type)
 
     def display(self):
-        print("Shows picture")
+        image_data = mpimg.imread(self.imageURL)
+        plt.imshow(image_data)
+        plt.axis('off')
+        plt.show()
 
     def __str__(self):
         return self.owner.username + " posted a picture\n"
